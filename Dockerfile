@@ -7,8 +7,13 @@ WORKDIR /app
 # Copy requirements (adjust file name if needed)
 COPY requirements.txt /app/
 
+# Install system dependencies required by lightgbm and xgboost (OpenMP runtime)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install dependencies
-RUN pip install --upgrade pip     && pip install -r requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copy the rest of the application code
 COPY . /app
