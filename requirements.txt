@@ -10,3 +10,4 @@ plotly
 requests
 xgboost
 lightgbm
+cloudpickle
